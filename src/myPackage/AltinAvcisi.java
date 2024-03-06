@@ -3,22 +3,32 @@ package myPackage;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class AltinAvcisi extends JPanel{
+public class AltinAvcisi extends JPanel implements ActionListener{
+	
+	Timer timer=new Timer(2000,this);
+	
     private Karakter karakter;
     private ArrayList<Engeller> engeller;
+    private ArrayList<HareketliEngeller> bees;
+    private ArrayList<HareketliEngeller> eagles;
 
     private int boyut;
     private int cellSize;
 
-    public AltinAvcisi(int boyut) {
+    public AltinAvcisi(int boyut) {    	
         this.boyut = boyut;
         this.cellSize = 1920/boyut;
         this.engeller = new ArrayList<>();
+        this.bees=new ArrayList<>();
+        this.eagles=new ArrayList<>();
         // Karakteri oluştur
         Lokasyon karakterLokasyon = new Lokasyon(0, 0);
         karakter = new Karakter(3, "Mario", karakterLokasyon);
@@ -47,8 +57,8 @@ public class AltinAvcisi extends JPanel{
                         
             switch (secim) {
             
-				case 0: engeller.add(kus); break;
-				case 1: engeller.add(ari); break;
+				case 0: engeller.add(kus); eagles.add(kus); break;
+				case 1: engeller.add(ari); bees.add(ari); break;
 				case 2: engeller.add(agac); break;
 				case 3: engeller.add(dag); break;
 				case 4: engeller.add(duvar); break;
@@ -57,15 +67,16 @@ public class AltinAvcisi extends JPanel{
 				case 7: engeller.add(gumus); break;	
             }
             
-           		}
-    }
-
+         }
+        timer.start();
         
+    }
+    
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        // Karelerin içeriğini çiz
+    public void paint(Graphics g) {
+    	// TODO Auto-generated method stub
+    	super.paint(g);
+    	// Karelerin içeriğini çiz
         for (int i = 0; i < boyut; i++) {
             for (int j = 0; j < boyut; j++) {
                 // Karelerin köşelerine yatay ve dikey çizgileri çiz
@@ -102,5 +113,45 @@ public class AltinAvcisi extends JPanel{
             engel.ciz(g, cellSize);
         }
     }
+    
+    @Override
+	public void repaint() {
+		// TODO Auto-generated method stub
+		super.repaint();
+	}
+    
+    int beeMove=0;
+    int beeFast=1;
+    int eagleMove=0;
+    int eagleFast=1;
+    
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		for(HareketliEngeller bee:bees) {
+			bee.getLokasyon().setX(bee.getLokasyon().getX()+beeFast);
+			beeMove+=beeFast;
+			if(beeMove==3) {
+				beeFast*=-1;
+			}
+			else if(beeMove==-3) {
+				beeFast*=-1;
+			}
+			
+		}
+		for(HareketliEngeller eagle:eagles) {
+			eagle.getLokasyon().setY(eagle.getLokasyon().getY()+eagleFast);
+			eagleMove+=eagleFast;
+			if(eagleMove==5) {
+				eagleFast*=-1;
+			}
+			else if(eagleMove==-5) {
+				eagleFast*=-1;
+			}
+		}
+		
+		repaint();
+		
+	}
 
 }
