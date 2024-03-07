@@ -10,4 +10,20 @@ public class HareketliEngeller extends Engeller {
 		this.menzil = menzil;
 		// TODO Auto-generated constructor stub
 	}
+
+	public char getEksen() {
+		return eksen;
+	}
+
+	public void setEksen(char eksen) {
+		this.eksen = eksen;
+	}
+
+	public int getMenzil() {
+		return menzil;
+	}
+
+	public void setMenzil(int menzil) {
+		this.menzil = menzil;
+	}
 }
