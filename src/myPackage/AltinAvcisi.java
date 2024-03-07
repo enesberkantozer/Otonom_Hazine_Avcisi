@@ -25,7 +25,7 @@ public class AltinAvcisi extends JPanel implements ActionListener{
 
     public AltinAvcisi(int boyut) {    	
         this.boyut = boyut;
-        this.cellSize = 1920/boyut;
+        this.cellSize = 10;
         this.engeller = new ArrayList<>();
         this.bees=new ArrayList<>();
         this.eagles=new ArrayList<>();
@@ -129,7 +129,7 @@ public class AltinAvcisi extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		for(HareketliEngeller bee:bees) {
-			bee.getLokasyon().setX(bee.getLokasyon().getX()+beeFast);
+			bee.getLokasyon().setX(bee.getLokasyon().getX()+(beeFast * cellSize));
 			beeMove+=beeFast;
 			if(beeMove==3) {
 				beeFast*=-1;
@@ -140,7 +140,7 @@ public class AltinAvcisi extends JPanel implements ActionListener{
 			
 		}
 		for(HareketliEngeller eagle:eagles) {
-			eagle.getLokasyon().setY(eagle.getLokasyon().getY()+eagleFast);
+			eagle.getLokasyon().setY(eagle.getLokasyon().getY()+(eagleFast * cellSize));
 			eagleMove+=eagleFast;
 			if(eagleMove==5) {
 				eagleFast*=-1;
