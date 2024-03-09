@@ -24,6 +24,8 @@ public class AltinAvcisi extends JPanel implements ActionListener{
     private int cellSize;
 
     public AltinAvcisi(int boyut) {    	
+        timer.start();
+
         this.boyut = boyut;
         this.cellSize = 10;
         this.engeller = new ArrayList<>();
@@ -67,9 +69,7 @@ public class AltinAvcisi extends JPanel implements ActionListener{
 				case 7: engeller.add(gumus); break;	
             }
             
-         }
-        timer.start();
-        
+         }       
     }
     
     @Override
