@@ -125,33 +125,53 @@ public class AltinAvcisi extends JPanel implements ActionListener{
     int eagleMove=0;
     int eagleFast=1;
     
-	@Override
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		// TODO Auto-generated method stub
+//		for(HareketliEngeller bee:bees) {
+//			bee.getLokasyon().setX(bee.getLokasyon().getX()+(beeFast * cellSize));
+//			beeMove+=beeFast;
+//			if(beeMove==3) {
+//				beeFast*=-1;
+//			}
+//			else if(beeMove==-3) {
+//				beeFast*=-1;
+//			}
+//			
+//		}
+//		for(HareketliEngeller eagle:eagles) {
+//			eagle.getLokasyon().setY(eagle.getLokasyon().getY()+(eagleFast * cellSize));
+//			eagleMove+=eagleFast;
+//			if(eagleMove==5) {
+//				eagleFast*=-1;
+//			}
+//			else if(eagleMove==-5) {
+//				eagleFast*=-1;
+//			}
+//		}
+//		
+//		repaint();
+//		
+//	}
+    @Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		for(HareketliEngeller bee:bees) {
-			bee.getLokasyon().setX(bee.getLokasyon().getX()+(beeFast * cellSize));
+			if(beeMove==3 || beeMove==-3) {
+				beeFast*=-1;
+			}
+			bee.getLokasyon().setX(bee.getLokasyon().getX()+(beeFast));
 			beeMove+=beeFast;
-			if(beeMove==3) {
-				beeFast*=-1;
-			}
-			else if(beeMove==-3) {
-				beeFast*=-1;
-			}
-			
 		}
+		
 		for(HareketliEngeller eagle:eagles) {
-			eagle.getLokasyon().setY(eagle.getLokasyon().getY()+(eagleFast * cellSize));
+			if(eagleMove==5 || eagleMove == -5) {
+				eagleFast*=-1;
+			}
+			eagle.getLokasyon().setY(eagle.getLokasyon().getY()+(eagleFast));
 			eagleMove+=eagleFast;
-			if(eagleMove==5) {
-				eagleFast*=-1;
-			}
-			else if(eagleMove==-5) {
-				eagleFast*=-1;
-			}
 		}
-		
 		repaint();
-		
 	}
 
 }
