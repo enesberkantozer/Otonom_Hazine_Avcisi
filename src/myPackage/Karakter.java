@@ -26,9 +26,9 @@ public class Karakter {
         this.lokasyon = lokasyon;
     }
 
-    public void EnKisaYol(Lokasyon hedefLokasyon) {
-        // En kısa yolu hesaplayan kod
+    public void enKisaYol(Lokasyon hedefLokasyon) {
     }
+    
     void hareketEt(int dx, int dy) {
         this.lokasyon.setX(this.lokasyon.getX() + dx);
         this.lokasyon.setY(this.lokasyon.getX() + dy);

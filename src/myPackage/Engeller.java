@@ -10,7 +10,11 @@ import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageInputStream;
 import javax.swing.JPanel;
 
-public class Engeller{
+public class Engeller {
+	public int boyut;
+	private BufferedImage image;
+	private Lokasyon lokasyon;
+
 	public Lokasyon getLokasyon() {
 		return lokasyon;
 	}
@@ -19,26 +23,20 @@ public class Engeller{
 		this.lokasyon = lokasyon;
 	}
 
-	public int boyut;
-	private BufferedImage image;
-	private Lokasyon lokasyon;
+	public Engeller(int boyut, String imagePath, Lokasyon lokasyon) {
+		this.boyut = boyut;
+		this.lokasyon = lokasyon;
 
-	 public Engeller(int boyut, String imagePath, Lokasyon lokasyon) {
-	        this.boyut = boyut;
-	        this.lokasyon = lokasyon;
+		try {
+			this.image = ImageIO.read(new File(imagePath));
 
-	        try {
-	            // Görüntüyü yükleyin
-	            //this.image = ImageIO.read(new FileImageInputStream(new File(imagePath)));//hatalı
-	            this.image = ImageIO.read(new File(imagePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	 }
-	 
-	 public void ciz(Graphics g, int cellSize) {
-	        // Görüntüyü çizin
-	        g.drawImage(image, lokasyon.getX() * cellSize, lokasyon.getY() * cellSize, boyut * cellSize, boyut * cellSize, null);
-	    }
+	public void ciz(Graphics g, int cellWidthSize, int cellHeightSize) {
+		g.drawImage(image, lokasyon.getX() * cellWidthSize, lokasyon.getY() * cellHeightSize, boyut * cellWidthSize, boyut * cellHeightSize,
+				Merkez.oyun);
+	}
 }
