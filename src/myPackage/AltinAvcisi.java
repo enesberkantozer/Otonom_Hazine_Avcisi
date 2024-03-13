@@ -13,10 +13,14 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.Timer;
 
 public class AltinAvcisi extends JPanel implements ActionListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	Timer timer = new Timer(1000, this);
 
