@@ -27,19 +27,20 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 	private ArrayList<HareketliEngeller> bees;
 	private ArrayList<HareketliEngeller> eagles;
 
-	private int boyut;
+	private int widthSize, heightSize;
 	private int cellWidthSize;
 	private int cellHeightSize;
 	BufferedImage leftRight;
 	BufferedImage upBottom;
 
-	public AltinAvcisi(int boyut) {
+	public AltinAvcisi(int widthSize,int heightSize) {
 		timer.start();
 
-		this.boyut = boyut;
-		this.cellWidthSize = 15;
-		this.cellHeightSize = 15;
-		setPreferredSize(new Dimension(boyut*cellWidthSize,boyut*cellHeightSize));
+		this.widthSize=widthSize;
+		this.heightSize=heightSize;
+		this.cellWidthSize = 25;
+		this.cellHeightSize = 25;
+		setPreferredSize(new Dimension(widthSize*cellWidthSize,heightSize*cellHeightSize));
 		this.engeller = new ArrayList<>();
 		this.bees = new ArrayList<>();
 		this.eagles = new ArrayList<>();
@@ -48,11 +49,11 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 		karakter = new Karakter(3, "Mario", karakterLokasyon);
 
 		Random rand = new Random();
-		int engelSayisi = rand.nextInt(boyut) + boyut / 2;
+		int engelSayisi = rand.nextInt(widthSize) + widthSize / 2;
 
 		for (int i = 0; i < engelSayisi; i++) {
-			int x = rand.nextInt(boyut);
-			int y = rand.nextInt(boyut);
+			int x = rand.nextInt(widthSize);
+			int y = rand.nextInt(heightSize);
 			Lokasyon randomLokasyon = new Lokasyon(x, y);
 			int randomBoy = rand.nextInt(4) + 2;
 			int secim = rand.nextInt(8);
@@ -104,11 +105,13 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 	public void paint(Graphics g) {
 		super.paint(g);
 
-		for (int i = 1; i < boyut; i++) {
+		for (int i = 1; i < widthSize; i++) {
 			g.setColor(Color.black);
-
-			g.drawLine(i * cellWidthSize, 0, i * cellWidthSize, boyut * cellHeightSize);
-			g.drawLine(0, i * cellHeightSize, boyut * cellWidthSize, i * cellHeightSize);
+			g.drawLine(i * cellWidthSize, 0, i * cellWidthSize, heightSize * cellHeightSize);
+		}
+		for (int i = 1; i < heightSize; i++) {
+			g.setColor(Color.black);
+			g.drawLine(0, i * cellHeightSize, widthSize * cellWidthSize, i * cellHeightSize);
 		}
 
 		for (int j = 0; j < engeller.size(); j++) {
