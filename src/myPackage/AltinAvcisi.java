@@ -23,7 +23,8 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 	private static final long serialVersionUID = 1L;
 
 	Timer timer = new Timer(500, this);
-
+	
+	private ArrayList<Lokasyon> coordinates;
 	private Karakter karakter;
 	private ArrayList<Engeller> engeller;
 	private ArrayList<HareketliEngeller> bees;
@@ -39,8 +40,8 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		timer.start();
 		this.widthSize=widthSize;
 		this.heightSize=heightSize;
-		this.cellWidthSize = 25;
-		this.cellHeightSize = 25;
+		this.cellWidthSize = 20;
+		this.cellHeightSize = 20;
 		setPreferredSize(new Dimension(widthSize*cellWidthSize,heightSize*cellHeightSize));
 		this.engeller = new ArrayList<>();
 		this.bees = new ArrayList<>();
@@ -101,9 +102,11 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 				break;
 			case 6:
 				engeller.add(altin);
+				coordinates.add(randomLokasyon);
 				break;
 			case 7:
 				engeller.add(gumus);
+				coordinates.add(randomLokasyon);
 				break;
 			}
 
