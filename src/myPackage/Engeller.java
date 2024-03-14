@@ -34,6 +34,6 @@ public class Engeller {
 
 	public void ciz(Graphics g, int cellWidthSize, int cellHeightSize) {
 		g.drawImage(image, lokasyon.getX() * cellWidthSize, lokasyon.getY() * cellHeightSize, boyut * cellWidthSize, boyut * cellHeightSize,
-				Merkez.oyun);
+				SetSizePanel.oyun);
 	}
 }

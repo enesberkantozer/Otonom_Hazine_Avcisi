@@ -1,6 +1,7 @@
 package myPackage;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -16,10 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class AltinAvcisi extends JPanel implements ActionListener {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	Timer timer = new Timer(1000, this);
@@ -39,8 +37,9 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 		timer.start();
 
 		this.boyut = boyut;
-		this.cellWidthSize = 25;
-		this.cellHeightSize = 25;
+		this.cellWidthSize = 15;
+		this.cellHeightSize = 15;
+		setPreferredSize(new Dimension(boyut*cellWidthSize,boyut*cellHeightSize));
 		this.engeller = new ArrayList<>();
 		this.bees = new ArrayList<>();
 		this.eagles = new ArrayList<>();

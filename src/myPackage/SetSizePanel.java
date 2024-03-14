@@ -1,91 +1,160 @@
 package myPackage;
 
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import java.awt.GridLayout;
-import javax.swing.JTextField;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JSlider;
+import java.awt.Font;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
-public class SetSizePanel extends JPanel {
+public class SetSizePanel extends JPanel implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	
+	public static AltinAvcisi oyun;
+	private JLabel lblNewLabel_1_1;
+	private JButton btnNewButton;
+	private JSlider slider;
+	private JLabel lblNewLabel_2;
+	private JFrame frame;
 
-	public SetSizePanel() {
-		setLayout(new BorderLayout(20, 25));
+	public SetSizePanel(JFrame frame) {
+		this.frame=frame;
+		setLayout(null);
+		requestFocus();
+		setFocusable(true);
+		setFocusTraversalKeysEnabled(false);
+		addKeyListener(this);
+		btnNewButton = new JButton("Onayla");
+		btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		btnNewButton.setBounds(224, 200, 211, 64);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				shutdown();
+			}
+		});
+		add(btnNewButton);
 		
-		JButton btnNewButton = new JButton("New button");
-		add(btnNewButton, BorderLayout.SOUTH);
-		
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.WEST);
-		panel.setLayout(new GridLayout(3, 0, 0, 30));
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		panel.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		panel.add(lblNewLabel_3);
-		
-		JPanel panel_1 = new JPanel();
-		add(panel_1, BorderLayout.EAST);
-		panel_1.setLayout(new GridLayout(3, 1, 50, 50));
-		
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("Boyut Seçiniz");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		lblNewLabel.setBounds(10, 30, 630, 75);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblNewLabel, BorderLayout.NORTH);
+		add(lblNewLabel);
 		
-		JPanel panel_2 = new JPanel();
-		add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new GridLayout(0, 1, 50, 30));
+		JLabel lblNewLabel_1 = new JLabel("Boyut :");
+		lblNewLabel_1.setBounds(10, 115, 82, 75);
+		add(lblNewLabel_1);
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JSlider slider = new JSlider();
+		slider = new JSlider();
+		slider.setBounds(102, 115, 464, 75);
+		add(slider);
 		slider.setPaintLabels(true);
 		slider.setPaintTicks(true);
 		slider.setSnapToTicks(true);
 		slider.setMinimum(50);
 		slider.setMaximum(1000);
-		panel_2.add(slider);
 		
-		JSlider slider_1 = new JSlider();
-		slider_1.setPaintLabels(true);
-		slider_1.setPaintTicks(true);
-		slider_1.setSnapToTicks(true);
-		slider_1.setMaximum(1000);
-		slider_1.setMinimum(50);
-		panel_2.add(slider_1);
+		lblNewLabel_1_1 = new JLabel("50");
+		lblNewLabel_1_1.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				if(Integer.parseInt(lblNewLabel_1_1.getText())>=50 || Integer.parseInt(lblNewLabel_1_1.getText())<=1000)
+					slider.setValue(Integer.parseInt(lblNewLabel_1_1.getText()));
+			}
+		});
+		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblNewLabel_1_1.setBounds(576, 115, 64, 64);
+		add(lblNewLabel_1_1);
 		
-		JSlider slider_2 = new JSlider();
-		slider_2.setPaintLabels(true);
-		slider_2.setPaintTicks(true);
-		slider_2.setSnapToTicks(true);
-		slider_2.setMinimum(50);
-		slider_2.setMaximum(1000);
-		panel_2.add(slider_2);
+		lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_2.setForeground(Color.RED);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(10, 85, 630, 20);
+		add(lblNewLabel_2);
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				lblNewLabel_1_1.setText(String.valueOf(slider.getValue()));
+			}
+		});
 		
 	}
 
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int c=e.getKeyCode();
+		String str=lblNewLabel_1_1.getText();
+		if(str=="0")
+			str="";
+		
+		if(c==KeyEvent.VK_0 || c==KeyEvent.VK_NUMPAD0)
+			str+="0";
+		else if(c==KeyEvent.VK_1 || c==KeyEvent.VK_NUMPAD1)
+			str+="1";
+		else if(c==KeyEvent.VK_2 || c==KeyEvent.VK_NUMPAD2)
+			str+="2";
+		else if(c==KeyEvent.VK_3 || c==KeyEvent.VK_NUMPAD3)
+			str+="3";
+		else if(c==KeyEvent.VK_4 || c==KeyEvent.VK_NUMPAD4)
+			str+="4";
+		else if(c==KeyEvent.VK_5 || c==KeyEvent.VK_NUMPAD5)
+			str+="5";
+		else if(c==KeyEvent.VK_6 || c==KeyEvent.VK_NUMPAD6)
+			str+="6";
+		else if(c==KeyEvent.VK_7 || c==KeyEvent.VK_NUMPAD7)
+			str+="7";
+		else if(c==KeyEvent.VK_8 || c==KeyEvent.VK_NUMPAD8)
+			str+="8";
+		else if(c==KeyEvent.VK_9 || c==KeyEvent.VK_NUMPAD9)
+			str+="9";
+		else if(c==KeyEvent.VK_BACK_SPACE) {
+			if(lblNewLabel_1_1.getText().length()==1)
+				str="0";
+			else
+				str=lblNewLabel_1_1.getText().substring(0, lblNewLabel_1_1.getText().length()-1);
+		}
+		else if(c==KeyEvent.VK_ENTER)
+			btnNewButton.doClick();
+		
+		if(Integer.parseInt(str)>1000)
+			str="1000";
+		lblNewLabel_1_1.setText(str);
+		
+		if(c==KeyEvent.VK_RIGHT)
+			slider.setValue(slider.getValue()+5);
+		else if(c==KeyEvent.VK_LEFT)
+			slider.setValue(slider.getValue()-5);
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	}
+	
+	public void shutdown() {
+		oyun = new AltinAvcisi(slider.getValue());
+		JScrollPane scrollPane=new JScrollPane(oyun);
+		frame.setSize(900,900);
+		frame.getContentPane().remove(this);
+		frame.getContentPane().add(scrollPane);
+		frame.setLocationRelativeTo(null);
+		
+	}
 }
