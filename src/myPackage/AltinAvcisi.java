@@ -24,7 +24,7 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 
 	Timer timer = new Timer(500, this);
 	
-	private ArrayList<Lokasyon> coordinates;
+	private ArrayList<Lokasyon> coordinates = new ArrayList<Lokasyon>();
 	private Karakter karakter;
 	private ArrayList<Engeller> engeller;
 	private ArrayList<HareketliEngeller> bees;
