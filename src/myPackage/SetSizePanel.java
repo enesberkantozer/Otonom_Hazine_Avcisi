@@ -225,6 +225,10 @@ public class SetSizePanel extends JPanel implements KeyListener {
 		frame.getContentPane().remove(this);
 		frame.getContentPane().add(scrollPane);
 		frame.setLocationRelativeTo(null);
+		scrollPane.requestFocus();
+		scrollPane.addKeyListener(oyun);
+		scrollPane.setFocusable(true);
+		scrollPane.setFocusTraversalKeysEnabled(false);
 
 	}
 

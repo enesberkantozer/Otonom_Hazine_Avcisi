@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,11 +18,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class AltinAvcisi extends JPanel implements ActionListener {
+public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 	
 	private static final long serialVersionUID = 1L;
 
-	Timer timer = new Timer(1000, this);
+	Timer timer = new Timer(500, this);
 
 	private Karakter karakter;
 	private ArrayList<Engeller> engeller;
@@ -28,14 +30,13 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 	private ArrayList<HareketliEngeller> eagles;
 
 	private int widthSize, heightSize;
-	private int cellWidthSize;
-	private int cellHeightSize;
+	public static int cellWidthSize;
+	public static int cellHeightSize;
 	BufferedImage leftRight;
 	BufferedImage upBottom;
 
 	public AltinAvcisi(int widthSize,int heightSize) {
 		timer.start();
-
 		this.widthSize=widthSize;
 		this.heightSize=heightSize;
 		this.cellWidthSize = 25;
@@ -46,7 +47,7 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 		this.eagles = new ArrayList<>();
 		// Karakteri oluştur
 		Lokasyon karakterLokasyon = new Lokasyon(0, 0);
-		karakter = new Karakter(3, "Mario", karakterLokasyon);
+		karakter = new Karakter(3, "Mario", karakterLokasyon,this);
 
 		Random rand = new Random();
 		int engelSayisi = rand.nextInt(widthSize) + widthSize / 2;
@@ -154,7 +155,8 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 			if (engel instanceof HareketliEngeller) {
 				for (int i = -1*((HareketliEngeller) engel).getMenzil()+1; i <= ((HareketliEngeller) engel).getMenzil()+2; i++) {
 					if(((HareketliEngeller) engel).getMenzil()==3) {
-						g.drawImage(leftRight, (((HareketliEngeller) engel).getStartLocation().getX() + i) * cellWidthSize,
+						g.drawImage(leftRight, (((HareketliEngeller) engel)
+								.getStartLocation().getX() + i) * cellWidthSize,
 								((HareketliEngeller) engel).getStartLocation().getY() * cellHeightSize,
 								cellWidthSize, cellHeightSize, this);
 						g.drawImage(leftRight, (((HareketliEngeller) engel).getStartLocation().getX() + i) * cellWidthSize,
@@ -173,6 +175,7 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 			 
 			engel.ciz(g, cellWidthSize, cellHeightSize);
 		}
+		karakter.ciz(g);
 	}
 
 	@Override
@@ -204,4 +207,36 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 		repaint();
 	}
 
+	public int getCellWidthSize() {
+		return cellWidthSize;
+	}
+
+	public int getCellHeightSize() {
+		return cellHeightSize;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int c=e.getKeyCode();
+		
+		if(c==KeyEvent.VK_W)
+			karakter.hareketEt(0, -1);
+		else if(c==KeyEvent.VK_A)
+			karakter.hareketEt(-1, 0);
+		else if(c==KeyEvent.VK_S)
+			karakter.hareketEt(0, 1);
+		else if(c==KeyEvent.VK_D)
+			karakter.hareketEt(1, 0);
+		else if(c==KeyEvent.VK_K)
+			System.out.println("K tuşuna tıkladın");
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	}
+	
 }
