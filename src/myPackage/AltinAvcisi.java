@@ -60,8 +60,16 @@ public class AltinAvcisi extends JPanel implements ActionListener {
 			HareketliEngeller kus = new HareketliEngeller(2, "src/img/bird.png", randomLokasyon, 'y', 5);
 			HareketliEngeller ari = new HareketliEngeller(2, "src/img/bee.png", randomLokasyon, 'x', 3);
 
-			HareketsizEngeller agac = new HareketsizEngeller(randomBoy, "src/img/tree.png", randomLokasyon);
-			HareketsizEngeller dag = new HareketsizEngeller(9, "src/img/mountain.png", randomLokasyon);
+			HareketsizEngeller dag;
+			HareketsizEngeller agac;
+			if(randomLokasyon.getX()<=(widthSize/2)) {
+				dag = new HareketsizEngeller(9, "src/img/summerMountain.png", randomLokasyon);
+				agac = new HareketsizEngeller(randomBoy, "src/img/summerTree.png", randomLokasyon);
+			}
+			else {
+				dag = new HareketsizEngeller(9, "src/img/winterMountain.png", randomLokasyon);
+				agac = new HareketsizEngeller(randomBoy, "src/img/winterTree.png", randomLokasyon);
+			}
 			HareketsizEngeller duvar = new HareketsizEngeller(5, "src/img/wall.png", randomLokasyon);
 			HareketsizEngeller kaya = new HareketsizEngeller(randomBoy, "src/img/rock.png", randomLokasyon);
 
