@@ -75,8 +75,8 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 			HareketsizEngeller duvar = new HareketsizEngeller(5, "src/img/wall.png", randomLokasyon);
 			HareketsizEngeller kaya = new HareketsizEngeller(randomBoy, "src/img/rock.png", randomLokasyon);
 
-			HareketsizEngeller altin = new HareketsizEngeller(3, "src/img/gold.png", randomLokasyon);
-			HareketsizEngeller gumus = new HareketsizEngeller(3, "src/img/silver.png", randomLokasyon);
+			HareketsizEngeller altin = new HareketsizEngeller(1, "src/img/gold.png", randomLokasyon);
+			HareketsizEngeller gumus = new HareketsizEngeller(1, "src/img/silver.png", randomLokasyon);
 
 			switch (secim) {
 

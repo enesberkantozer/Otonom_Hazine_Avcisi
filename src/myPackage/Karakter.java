@@ -13,7 +13,7 @@ public class Karakter {
     private Lokasyon lokasyon;
     private BufferedImage image;
     private AltinAvcisi map;
-    private int karakterWidth=2, karakterHeight=4;
+    private int karakterWidth=1, karakterHeight=1;
 
     public Karakter(int ID, String ad, Lokasyon lokasyon, AltinAvcisi map) {
         this.ID = ID;
