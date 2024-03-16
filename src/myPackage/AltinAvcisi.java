@@ -24,7 +24,8 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 
 	Timer timer = new Timer(500, this);
 	
-	private ArrayList<Lokasyon> coordinates = new ArrayList<Lokasyon>();
+	private Random rand = new Random();
+	private ArrayList<Lokasyon> treasureLocation = new ArrayList<Lokasyon>();
 	private Karakter karakter;
 	private ArrayList<Engeller> engeller;
 	private ArrayList<HareketliEngeller> bees;
@@ -35,9 +36,13 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 	public static int cellHeightSize;
 	BufferedImage leftRight;
 	BufferedImage upBottom;
+	
+	private boolean isContinueWay;
+	private Lokasyon currentTarget;
 
 	public AltinAvcisi(int widthSize,int heightSize) {
 		timer.start();
+		this.isContinueWay=false;
 		this.widthSize=widthSize;
 		this.heightSize=heightSize;
 		this.cellWidthSize = 20;
@@ -50,7 +55,6 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		Lokasyon karakterLokasyon = new Lokasyon(0, 0);
 		karakter = new Karakter(3, "Mario", karakterLokasyon,this);
 
-		Random rand = new Random();
 		int engelSayisi = rand.nextInt(widthSize) + widthSize / 2;
 
 		for (int i = 0; i < engelSayisi; i++) {
@@ -102,11 +106,11 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 				break;
 			case 6:
 				engeller.add(altin);
-				coordinates.add(randomLokasyon);
+				treasureLocation.add(randomLokasyon);
 				break;
 			case 7:
 				engeller.add(gumus);
-				coordinates.add(randomLokasyon);
+				treasureLocation.add(randomLokasyon);
 				break;
 			}
 
@@ -207,6 +211,7 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 			eagleFast *= -1;
 		}
 		eagleMove += eagleFast;
+		goToTreasure(karakter);
 		repaint();
 	}
 
@@ -240,6 +245,72 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+	}
+	
+	int distance=0;
+	boolean xDone=false;
+	boolean yDone=false;
+	int x_y_Random;
+	private void goToTreasure(Karakter miner) {
+		if(isContinueWay) {
+			if(!(xDone && yDone)) {
+				if(!(xDone || yDone)) {
+					x_y_Random=rand.nextInt(2);
+				}
+				else if(xDone) {
+					x_y_Random=1;
+				}
+				else if(yDone) {
+					x_y_Random=0;
+				}
+				if(x_y_Random==0) {
+
+					if(currentTarget.getX()>karakter.getLokasyon().getX()) {
+						miner.hareketEt(1, 0);
+					}
+					else if(currentTarget.getX()==karakter.getLokasyon().getX()) {
+						xDone=true;
+					}
+					else {
+						miner.hareketEt(-1, 0);
+					}
+				}
+				else if(x_y_Random==1) {
+					if(currentTarget.getY()>karakter.getLokasyon().getY()) {
+						miner.hareketEt(0, 1);
+					}
+					else if(currentTarget.getY()==karakter.getLokasyon().getY()) {
+						yDone=true;
+					}
+					else {
+						miner.hareketEt(0, -1);
+					}
+				}
+				distance--;
+			}
+			else {
+				System.out.println("Hazine toplandı");
+				xDone=false; yDone=false;
+				treasureLocation.remove(currentTarget);
+				isContinueWay=false;
+				if(treasureLocation.size()==0) {
+					timer.stop();
+					System.out.println("Oyun bitti");
+				}
+			}
+		}
+		else {
+			int minDistance=3000;
+			for (Lokasyon treasure : treasureLocation) {
+				distance=Math.abs(treasure.getX()-karakter.getLokasyon().getX());
+				distance+=Math.abs(treasure.getY()-karakter.getLokasyon().getY());
+				if(distance<minDistance) {
+					minDistance=distance;
+					currentTarget=treasure;
+				}
+			}
+			isContinueWay=true;
+		}
 	}
 	
 }
