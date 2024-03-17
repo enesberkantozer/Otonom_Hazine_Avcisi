@@ -220,6 +220,7 @@ public class SetSizePanel extends JPanel implements KeyListener {
 
 	public void shutdown() {
 		oyun = new AltinAvcisi(sliderWidth.getValue(), sliderHeight.getValue());
+		GameDialog dialog=new GameDialog(oyun);
 		JScrollPane scrollPane = new JScrollPane(oyun);
 		frame.setSize(900, 900);
 		frame.getContentPane().remove(this);
@@ -249,7 +250,7 @@ public class SetSizePanel extends JPanel implements KeyListener {
 		}catch(NumberFormatException e1) {
 			lblCaution.setText("Sayı biçimi hatası");
 		}catch(Exception e2) {
-			lblCaution.setText("Hata");
+			//lblCaution.setText("Hata");
 		}
 	}
 }

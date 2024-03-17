@@ -1,16 +1,20 @@
 package myPackage;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Engeller {
-	public int boyut;
-	private BufferedImage image;
-	private Lokasyon lokasyon;
+public abstract class Engeller extends Rectangle{
+	private static final long serialVersionUID = 1L;
+	public int width;
+	public int height;
+	private String treasureType;
+	protected BufferedImage image;
+	protected Lokasyon lokasyon;
 
 	public Lokasyon getLokasyon() {
 		return lokasyon;
@@ -20,8 +24,11 @@ public class Engeller {
 		this.lokasyon = lokasyon;
 	}
 
-	public Engeller(int boyut, String imagePath, Lokasyon lokasyon) {
-		this.boyut = boyut;
+	public Engeller(int width, int height, String imagePath, Lokasyon lokasyon, String treasureType) {
+		super(lokasyon.getX(),lokasyon.getY(),width,height);
+		this.width=width;
+		this.height=height;
+		this.treasureType=treasureType;
 		this.lokasyon = lokasyon;
 
 		try {
@@ -32,8 +39,9 @@ public class Engeller {
 		}
 	}
 
-	public void ciz(Graphics g, int cellWidthSize, int cellHeightSize) {
-		g.drawImage(image, lokasyon.getX() * cellWidthSize, lokasyon.getY() * cellHeightSize, boyut * cellWidthSize, boyut * cellHeightSize,
-				SetSizePanel.oyun);
+	public abstract void ciz(Graphics g, int cellWidthSize, int cellHeightSize);
+
+	public String getTreasureType() {
+		return treasureType;
 	}
 }

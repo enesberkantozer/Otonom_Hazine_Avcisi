@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -14,11 +15,14 @@ public class Karakter {
     private BufferedImage image;
     private AltinAvcisi map;
     private int karakterWidth=1, karakterHeight=1;
+    
+    public static ArrayList<Lokasyon> charLocations=new ArrayList<Lokasyon>();
 
     public Karakter(int ID, String ad, Lokasyon lokasyon, AltinAvcisi map) {
         this.ID = ID;
         this.ad = ad;
         this.lokasyon = lokasyon;
+        this.charLocations.add(new Lokasyon(lokasyon.getX(), lokasyon.getY()));
         this.map=map;
         try {
 			this.image=ImageIO.read(new File("src/img/miner.png"));
