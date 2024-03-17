@@ -251,8 +251,6 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		}
 		greenWayDraw(g);
 		karakter.ciz(g);
-		SetSizePanel.gameScrollPane.getHorizontalScrollBar().setValue((karakter.getLokasyon().getX()*cellWidthSize)-(SetSizePanel.gameScrollPane.getViewport().getWidth()/2));
-		SetSizePanel.gameScrollPane.getVerticalScrollBar().setValue((karakter.getLokasyon().getY()*cellHeightSize)-(SetSizePanel.gameScrollPane.getViewport().getHeight()/2));
 	}
 
 	@Override
@@ -282,6 +280,8 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		}
 		eagleMove += eagleFast;
 		goToTreasure(karakter);
+		SetSizePanel.gameScrollPane.getHorizontalScrollBar().setValue((karakter.getLokasyon().getX()*cellWidthSize)-(SetSizePanel.gameScrollPane.getViewport().getWidth()/2));
+		SetSizePanel.gameScrollPane.getVerticalScrollBar().setValue((karakter.getLokasyon().getY()*cellHeightSize)-(SetSizePanel.gameScrollPane.getViewport().getHeight()/2));
 		repaint();
 	}
 
