@@ -21,7 +21,6 @@ public class GameDialog extends JDialog {
 	public static JSlider gameSpeedSlider;
 	public static DefaultListModel<String> list=new DefaultListModel<String>();
 	private JList<String> treasureList;
-	private boolean tiklandiTiklanmadi=false;
 
 	public GameDialog(AltinAvcisi game, int fogWidth, int fogHeight) {
 		setBounds(100, 100, 524, 367);
@@ -47,11 +46,10 @@ public class GameDialog extends JDialog {
 		gameSpeedSlider.setBounds(10, 39, 488, 26);
 		getContentPane().add(gameSpeedSlider);
 		
-		JButton btnNewButton = new JButton("Sis Kaldır");
+		JButton btnNewButton = new JButton("Sis Ekle");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!tiklandiTiklanmadi) {
-					tiklandiTiklanmadi=true;
+				if(btnNewButton.getText().equals("Sis Kaldır")) {
 					btnNewButton.setText("Sis Ekle");
 					for(int i=0;i<fogWidth;i++) {
 						for(int j=0;j<fogHeight;j++) {
@@ -60,7 +58,6 @@ public class GameDialog extends JDialog {
 					}
 				}
 				else {
-					tiklandiTiklanmadi=false;
 					btnNewButton.setText("Sis Kaldır");
 					for(int i=0;i<fogWidth;i++) {
 						for(int j=0;j<fogHeight;j++) {

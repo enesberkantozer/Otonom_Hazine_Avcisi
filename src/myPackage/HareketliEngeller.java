@@ -7,14 +7,14 @@ public class HareketliEngeller extends Engeller {
 	
 	private char eksen;
 	private int xmenzil,ymenzil;
-	private int width, height;
+	private int engelWidth, engelHeight;
 	private Lokasyon startLocation, lokasyon;
 	
-	HareketliEngeller(int width, int height, String imagePath, Lokasyon lokasyon, int xmenzil,int ymenzil) {
-		super((xmenzil==1)? width: ((xmenzil*2)+width),(ymenzil==1)? height:((ymenzil*2)+height), imagePath, 
+	HareketliEngeller(int engelWidth, int engelHeight, String imagePath, Lokasyon lokasyon, int xmenzil,int ymenzil) {
+		super((xmenzil==1)? engelWidth: ((xmenzil*2)+engelWidth),(ymenzil==1)? engelHeight:((ymenzil*2)+engelHeight), imagePath, 
 				(xmenzil==1)? (new Lokasyon(lokasyon.getX(),lokasyon.getY()-ymenzil+1)): (new Lokasyon(lokasyon.getX()-xmenzil+1,lokasyon.getY())),null);
-		this.width=width;
-		this.height=height;
+		this.engelWidth=engelWidth;
+		this.engelHeight=engelHeight;
 		this.xmenzil = xmenzil;
 		this.ymenzil=ymenzil;
 		this.startLocation=new Lokasyon(lokasyon.getX(), lokasyon.getY());
@@ -60,9 +60,16 @@ public class HareketliEngeller extends Engeller {
 
 	@Override
 	public void ciz(Graphics g, int cellWidthSize, int cellHeightSize) {
-		g.drawImage(image, lokasyon.getX() * cellWidthSize, lokasyon.getY() * cellHeightSize, width * cellWidthSize, height * cellHeightSize,
+		g.drawImage(image, lokasyon.getX() * cellWidthSize, lokasyon.getY() * cellHeightSize, engelWidth * cellWidthSize, engelHeight * cellHeightSize,
 				SetSizePanel.oyun);
 	}
-    
-    
+
+	public int getEngelWidth() {
+		return engelWidth;
+	}
+
+	public int getEngelHeight() {
+		return engelHeight;
+	}
+	
 }

@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,8 +33,6 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 	private int widthSize, heightSize;
 	public static int cellWidthSize;
 	public static int cellHeightSize;
-	BufferedImage leftRight;
-	BufferedImage upBottom;
 	
 	public static boolean[][] sis;
 	private boolean isContinueWay;
@@ -51,14 +48,13 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		this.sis=new boolean[widthSize][heightSize];
 		for (int i = 0; i < sis.length; i++) {
 			for (int j = 0; j < sis[i].length; j++) {
-				sis[i][j]=true;
+				sis[i][j]=false;
 			}
 		}
 		setPreferredSize(new Dimension(widthSize*cellWidthSize,heightSize*cellHeightSize));
 		this.engeller = new ArrayList<>();
 		this.bees = new ArrayList<>();
 		this.eagles = new ArrayList<>();
-		// Karakteri oluştur
 		Lokasyon karakterLokasyon = new Lokasyon(rand.nextInt(widthSize), rand.nextInt(heightSize));
 		karakter = new Karakter(1,1,3, "Mario", karakterLokasyon,this);
 
@@ -218,39 +214,19 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 			g.setColor(Color.black);
 			g.drawLine(0, i * cellHeightSize, widthSize * cellWidthSize, i * cellHeightSize);
 		}
-
-		try {
-			leftRight = ImageIO.read(new File("src/img/leftRight.png"));
-			upBottom=ImageIO.read(new File("src/img/upBottom.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		for (Engeller engel : engeller) {
 			if (engel instanceof HareketliEngeller) {
 				int menzil;
+				g.setColor(Color.red);
 				if(((HareketliEngeller) engel).getXmenzil()!=1) {
 					menzil=((HareketliEngeller) engel).getXmenzil();
+					g.fillRect(engel.getLokasyon().getX()*cellWidthSize, (engel.getLokasyon().getY()+((HareketliEngeller)engel).getEngelHeight()/2)*cellHeightSize-cellHeightSize/4,
+							cellWidthSize*(menzil+1)*2, cellHeightSize*((HareketliEngeller)engel).getEngelHeight()/4);
 				}
 				else {
 					menzil=((HareketliEngeller) engel).getYmenzil();
-				}
-				for (int i = -1*menzil+1; i <= menzil+2; i++) {
-					if(((HareketliEngeller) engel).getXmenzil()==3) {
-						g.drawImage(leftRight, (((HareketliEngeller) engel)
-								.getStartLocation().getX() + i) * cellWidthSize,
-								((HareketliEngeller) engel).getStartLocation().getY() * cellHeightSize,
-								cellWidthSize, cellHeightSize, this);
-						g.drawImage(leftRight, (((HareketliEngeller) engel).getStartLocation().getX() + i) * cellWidthSize,
-								(((HareketliEngeller) engel).getStartLocation().getY()+1) * cellHeightSize,
-								cellWidthSize, cellHeightSize, this);
-					} else if(((HareketliEngeller) engel).getYmenzil()==5) {
-						g.drawImage(upBottom, ((HareketliEngeller) engel).getStartLocation().getX() * cellWidthSize,
-								(((HareketliEngeller) engel).getStartLocation().getY()+i) * cellHeightSize,
-								cellWidthSize, cellHeightSize, this);
-						g.drawImage(upBottom, (((HareketliEngeller) engel).getStartLocation().getX()+1) * cellWidthSize,
-								(((HareketliEngeller) engel).getStartLocation().getY()+i) * cellHeightSize,
-								cellWidthSize, cellHeightSize, this);
-					}
+					g.fillRect((engel.getLokasyon().getX()+((HareketliEngeller)engel).getEngelWidth()/2)*cellWidthSize-cellWidthSize/4, engel.getLokasyon().getY()*cellHeightSize,
+							cellWidthSize*((HareketliEngeller)engel).getEngelWidth()/4, cellHeightSize*(menzil+1)*2);
 				}
 			}
 			 
@@ -262,11 +238,8 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		for(int i=0;i<widthSize;i++) {
 			for(int j=0;j<heightSize;j++) {
 				if(sis[i][j]) {
-					try {
-						g.drawImage(ImageIO.read(new File("src/img/hide.png")), i*cellWidthSize, j*cellHeightSize, cellWidthSize, cellHeightSize, this);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					g.setColor(Color.lightGray);
+					g.fillRect(i*cellWidthSize, j*cellHeightSize, cellWidthSize, cellHeightSize);
 				}
 			}
 		}
