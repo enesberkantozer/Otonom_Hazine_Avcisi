@@ -11,6 +11,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GameDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +21,7 @@ public class GameDialog extends JDialog {
 	public static JSlider gameSpeedSlider;
 	public static DefaultListModel<String> list=new DefaultListModel<String>();
 	private JList<String> treasureList;
+	private boolean tiklandiTiklanmadi=false;
 
 	public GameDialog(AltinAvcisi game) {
 		setBounds(100, 100, 524, 367);
@@ -45,6 +48,16 @@ public class GameDialog extends JDialog {
 		getContentPane().add(gameSpeedSlider);
 		
 		JButton btnNewButton = new JButton("Sis Oluştur/Kaldır");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!tiklandiTiklanmadi) {
+					tiklandiTiklanmadi=true;
+				}
+				else {
+					tiklandiTiklanmadi=false;
+				}
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton.setBounds(176, 75, 159, 21);
 		getContentPane().add(btnNewButton);

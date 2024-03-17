@@ -37,6 +37,7 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 	BufferedImage leftRight;
 	BufferedImage upBottom;
 	
+	private boolean[][] sis;
 	private boolean isContinueWay;
 	private Engeller currentTarget;
 
@@ -47,6 +48,12 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		this.heightSize=heightSize;
 		this.cellWidthSize = 20;
 		this.cellHeightSize = 20;
+		this.sis=new boolean[widthSize][heightSize];
+		for (int i = 0; i < sis.length; i++) {
+			for (int j = 0; j < sis[i].length; j++) {
+				sis[i][j]=true;
+			}
+		}
 		setPreferredSize(new Dimension(widthSize*cellWidthSize,heightSize*cellHeightSize));
 		this.engeller = new ArrayList<>();
 		this.bees = new ArrayList<>();
@@ -251,6 +258,18 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		}
 		greenWayDraw(g);
 		karakter.ciz(g);
+		
+		for(int i=0;i<widthSize;i++) {
+			for(int j=0;j<heightSize;j++) {
+				if(sis[i][j]) {
+					try {
+						g.drawImage(ImageIO.read(new File("src/img/hide.png")), i*cellWidthSize, j*cellHeightSize, cellWidthSize, cellHeightSize, this);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -280,6 +299,17 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		}
 		eagleMove += eagleFast;
 		goToTreasure(karakter);
+		
+		for (Lokasyon location:Karakter.charLocations) {
+			for(int i=0;i<widthSize;i++) {
+				for(int j=0;j<heightSize;j++) {
+					if(!(i<location.getX()-3 || i>location.getX()+3 || j<location.getY()-3 || j>location.getY()+3)) {
+						sis[i][j]=false;
+					}
+				}
+			}
+		}
+		
 		SetSizePanel.gameScrollPane.getHorizontalScrollBar().setValue((karakter.getLokasyon().getX()*cellWidthSize)-(SetSizePanel.gameScrollPane.getViewport().getWidth()/2));
 		SetSizePanel.gameScrollPane.getVerticalScrollBar().setValue((karakter.getLokasyon().getY()*cellHeightSize)-(SetSizePanel.gameScrollPane.getViewport().getHeight()/2));
 		repaint();
