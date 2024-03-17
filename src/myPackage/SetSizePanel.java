@@ -218,18 +218,19 @@ public class SetSizePanel extends JPanel implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 	}
 
+	public static JScrollPane gameScrollPane;
 	public void shutdown() {
 		oyun = new AltinAvcisi(sliderWidth.getValue(), sliderHeight.getValue());
 		GameDialog dialog=new GameDialog(oyun);
-		JScrollPane scrollPane = new JScrollPane(oyun);
+		gameScrollPane = new JScrollPane(oyun);
 		frame.setSize(900, 900);
 		frame.getContentPane().remove(this);
-		frame.getContentPane().add(scrollPane);
+		frame.getContentPane().add(gameScrollPane);
 		frame.setLocationRelativeTo(null);
-		scrollPane.requestFocus();
-		scrollPane.addKeyListener(oyun);
-		scrollPane.setFocusable(true);
-		scrollPane.setFocusTraversalKeysEnabled(false);
+		gameScrollPane.requestFocus();
+		gameScrollPane.addKeyListener(oyun);
+		gameScrollPane.setFocusable(true);
+		gameScrollPane.setFocusTraversalKeysEnabled(false);
 
 	}
 
