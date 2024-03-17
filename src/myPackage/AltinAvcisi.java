@@ -56,7 +56,7 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		this.bees = new ArrayList<>();
 		this.eagles = new ArrayList<>();
 		Lokasyon karakterLokasyon = new Lokasyon(rand.nextInt(widthSize), rand.nextInt(heightSize));
-		karakter = new Karakter(1,1,3, "Mario", karakterLokasyon,this);
+		karakter = new Karakter(2,2,3, "Mario", karakterLokasyon,this);
 
 		int engelSayisi = rand.nextInt(widthSize) + widthSize / 2;
 
@@ -82,10 +82,10 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 			HareketsizEngeller duvar = new HareketsizEngeller(5,5, "src/img/wall.png", randomLokasyon,null);
 			HareketsizEngeller kaya = new HareketsizEngeller(randomBoy,randomBoy, "src/img/rock.png", randomLokasyon,null);
 
-			HareketsizEngeller altin = new HareketsizEngeller(1,1, "src/img/gold.png", randomLokasyon,"A");
-			HareketsizEngeller gumus = new HareketsizEngeller(1,1, "src/img/silver.png", randomLokasyon,"G");
-			HareketsizEngeller zümrüt = new HareketsizEngeller(1, 1, "src/img/zumrut.png", randomLokasyon,"Z");
-			HareketsizEngeller bakir= new HareketsizEngeller(1, 1, "src/img/bakir.png", randomLokasyon,"B");
+			HareketsizEngeller altin = new HareketsizEngeller(2,2, "src/img/gold.png", randomLokasyon,"A");
+			HareketsizEngeller gumus = new HareketsizEngeller(2,2, "src/img/silver.png", randomLokasyon,"G");
+			HareketsizEngeller zümrüt = new HareketsizEngeller(2,2, "src/img/zumrut.png", randomLokasyon,"Z");
+			HareketsizEngeller bakir= new HareketsizEngeller(2,2, "src/img/bakir.png", randomLokasyon,"B");
 
 			boolean isIntersects=false;
 			
