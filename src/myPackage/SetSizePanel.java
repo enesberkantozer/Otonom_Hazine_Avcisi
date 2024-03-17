@@ -23,7 +23,6 @@ public class SetSizePanel extends JPanel implements KeyListener {
 	private static final long serialVersionUID = 1L;
 
 	public static AltinAvcisi oyun;
-	private GameDialog dialog;
 	private JLabel lblCaution;
 	private JTextField textFieldSizeWidth;
 	private JTextField textFieldSizeHeight;
@@ -222,7 +221,7 @@ public class SetSizePanel extends JPanel implements KeyListener {
 	public static JScrollPane gameScrollPane;
 	public void shutdown() {
 		oyun = new AltinAvcisi(sliderWidth.getValue(), sliderHeight.getValue());
-		dialog=new GameDialog(oyun,sliderWidth.getValue(), sliderHeight.getValue());
+		GameDialog dialog=new GameDialog(oyun,sliderWidth.getValue(), sliderHeight.getValue());
 		gameScrollPane = new JScrollPane(oyun);
 		frame.setSize(900, 900);
 		frame.getContentPane().remove(this);
