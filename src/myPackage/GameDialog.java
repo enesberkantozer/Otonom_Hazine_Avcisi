@@ -23,7 +23,7 @@ public class GameDialog extends JDialog {
 	private JList<String> treasureList;
 	private boolean tiklandiTiklanmadi=false;
 
-	public GameDialog(AltinAvcisi game) {
+	public GameDialog(AltinAvcisi game, int fogWidth, int fogHeight) {
 		setBounds(100, 100, 524, 367);
 		getContentPane().setLayout(null);
 		
@@ -47,14 +47,26 @@ public class GameDialog extends JDialog {
 		gameSpeedSlider.setBounds(10, 39, 488, 26);
 		getContentPane().add(gameSpeedSlider);
 		
-		JButton btnNewButton = new JButton("Sis Oluştur/Kaldır");
+		JButton btnNewButton = new JButton("Sis Kaldır");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!tiklandiTiklanmadi) {
 					tiklandiTiklanmadi=true;
+					btnNewButton.setText("Sis Ekle");
+					for(int i=0;i<fogWidth;i++) {
+						for(int j=0;j<fogHeight;j++) {
+							AltinAvcisi.sis[i][j]=false;
+						}
+					}
 				}
 				else {
 					tiklandiTiklanmadi=false;
+					btnNewButton.setText("Sis Kaldır");
+					for(int i=0;i<fogWidth;i++) {
+						for(int j=0;j<fogHeight;j++) {
+							AltinAvcisi.sis[i][j]=true;
+						}
+					}
 				}
 			}
 		});

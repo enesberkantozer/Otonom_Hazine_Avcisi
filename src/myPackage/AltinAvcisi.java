@@ -37,7 +37,7 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 	BufferedImage leftRight;
 	BufferedImage upBottom;
 	
-	private boolean[][] sis;
+	public static boolean[][] sis;
 	private boolean isContinueWay;
 	private Engeller currentTarget;
 
