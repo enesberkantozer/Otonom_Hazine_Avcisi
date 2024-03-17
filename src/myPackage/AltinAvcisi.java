@@ -53,7 +53,7 @@ public class AltinAvcisi extends JPanel implements ActionListener,KeyListener {
 		this.eagles = new ArrayList<>();
 		// Karakteri oluştur
 		Lokasyon karakterLokasyon = new Lokasyon(rand.nextInt(widthSize), rand.nextInt(heightSize));
-		karakter = new Karakter(3, "Mario", karakterLokasyon,this);
+		karakter = new Karakter(1,1,3, "Mario", karakterLokasyon,this);
 
 		int engelSayisi = rand.nextInt(widthSize) + widthSize / 2;
 
